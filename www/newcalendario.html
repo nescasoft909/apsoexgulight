@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1,width=device-width, height=device-height"/>
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="libs/jquery/jquery.mobile-1.4.4.min.css" />
+        <link rel="stylesheet" type="text/css" href="libs/metroui/metro-bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="libs/metroui/metro-bootstrap-responsive.css" />
+        <link rel="stylesheet" type="text/css" href="libs/metroui/iconFont.min.css" />
+        <title>ExpoGuayaquil</title>
+    </head>
+    <body class="metro"> 
+        <nav>
+            <a href="" id="menuToggle" title="show menu">
+                <span class="navClosed"><i>show menu</i></span>
+            </a>
+            <a title="Home" href="main.html" ><span class="icon-home"> Home</span></a>
+            <a title="Perfil" href="main.html" ><span class="icon-user"> Perfil</span></a>
+            <a title="Buscar" href="main.html" ><span class="icon-search"> Buscar</span></a>
+        </nav>
+        <!-- CALENDARIO-->
+        <div id="calendario" class="ametrocontenido container" data-role="page">
+            <div class="titulo"><h1>Calendario</h1>
+            </div>
+            <div class="doble">
+                <div class="tile-group full no-margin">
+                    <div class="tile full bg-dark opacity calendario-principal" >
+                        <div class="tile-content image">
+                            <img src="img/evento_principal.jpg">
+                        </div>
+                        <div class="tile-status bg-dark opacity">
+                            <span class="name">Proximo evento</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="simplerow">
+                <div class="tile-group full no-margin">
+                    <div class="tile full double-vertical bg-dark opacity calendario-eventos" >
+                        <div class="tile-content icon">
+                            <i class="icon-calendar"></i>
+                        </div>
+                        <div class="tile-status">
+                            <span class="name">Calendario por Mes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="simplerow">
+                <div class="tile-group full no-margin">
+                    <div class="tile full bg-dark opacity calendario-eventos" >
+                        <div class="tile-content icon">
+                            <i class="icon-calendar"></i>
+                        </div>
+                        <div class="tile-status">
+                            <span class="name">Calendario por tipo de evento</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="onethird">
+                <div class="tile-group full no-margin">
+                    <div class="tile simpleheight bg-green no-margin">
+                        <div class="tile-content icon">
+                            <i class="icon-ticket"></i>
+                        </div>
+                        <div class="tile-status">
+                            <span class="name">Pases para Eventos</span>
+                        </div>
+                    </div>
+                    <div class="tile simpleheight no-margin">
+                        <div class="tile-content image">
+                            <img src="img/eventos.jpg">
+                        </div>
+                        <div class="tile-status bg-dark opacity">
+                            <span class="name">Eventos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="twothird">
+                <div class="tile full bg-darkRed" id="editar_fotos">
+                    <div class="tile-content icon icono">
+                        <i class="icon-camera"></i>
+                    </div>
+                    <div class="tile-status">
+                        <span class="name">App Eddddditar Fotos</span>
+                    </div>
+                </div>
+            </div>
+            <div class="botones">
+            </div>
+        </div>
+        
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="libs/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="libs/jquery/jquery.mobile-1.4.4.min.js"></script>
+        <script type="text/javascript" src="libs/metroui/metro.min.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+            $('#content-page').on('pageshow', function () {
+                loadMenu();
+                ajustarObjetos(); 
+            });
+            $(document).ready(function(){
+                ajustarObjetos(); 
+                loadMenu();
+            });
+            $(window).resize(function(){
+                ajustarObjetos();
+                loadMenu();
+            });
+            //app.ajustarObjetos();
+            $(document).on("pageshow", "#calendario", function( event ) {
+                loadMenu();
+                ajustarObjetos();
+            });
+            //Listeners
+            $(".calendario-eventos").click(function(){
+                $( ":mobile-pagecontainer" ).pagecontainer( "change", "newmain.html#calendario", { role: "page",transition:"slide" } );
+                console.log('z');
+            });
+            $( ":mobile-pagecontainer" ).on( "pagecontainerhide", function( event, ui ) {
+                console.log('y');
+            });
+                
+        </script>
+        <style>
+            .internalrow{
+                width: 100%;
+                height: 50%;
+            }
+            .cuadro_simple{
+                width: 50%;
+                height: 100%;
+                float: left;
+                padding-right: 6px;
+            }
+            .onethird{
+                width: 33%;
+                float: left;
+                padding: 3px;
+            }
+            .twothird{
+                width: 66%;
+                float: left;
+                padding: 6px 3px 3px 3px;
+            }
+            .onethird>.tile-group>.tile{
+                width: 100%;
+                height: 50%;
+                padding-bottom: 6px!important;
+                margin-bottom: 3px!important;
+            }
+            .titulo{
+                height: 40px;
+            }
+            .botones{
+                height: 40px;
+            }
+            
+        </style>
+        
+    </body>
+</html>

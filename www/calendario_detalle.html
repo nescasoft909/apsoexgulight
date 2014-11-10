@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <!--meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" /-->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=high-dpi"/>
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="libs/jquery/jquery.mobile-1.4.4.min.css" />
+        <link rel="stylesheet" type="text/css" href="libs/metroui/metro-bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="libs/metroui/metro-bootstrap-responsive.min.css" />
+        <link rel="stylesheet" type="text/css" href="libs/metroui/iconFont.min.css" />
+        <title>ExpoGuayaquil</title>
+    </head>
+    <body class="metro"> 
+        <div id="content-page" class="ametrocontenido container">
+            <!--div class="tile-area no-desktop" style="width: 1774px;">
+                <!--h1 class="tile-area-title fg-white">ExpoGuayaquil - main</h1>
+            <!--div class="user-id">
+                <div class="user-id-image">
+                    <span class="icon-user no-display1"></span>
+                    <img src="images/Battlefield_4_Icon.png" class="no-display">
+                </div>
+                <div class="user-id-name">
+                    <span class="first-name">Sergey</span>
+                    <span class="last-name">Pimenov</span>
+                </div>
+            </div>
+            </div-->
+            <!--header class="bg-dark">
+            <div class="navigation-bar dark">
+                <div class="navigation-bar-content container">
+                    <a href="/" class="element"><span class="icon-grid-view"></span> CALENDARIO DE EVENTOS</a>
+                    <span class="element-divider"></span>
+
+                    <a class="element1 pull-menu" href="#"></a>
+                    <ul class="element-menu">
+                        <li>
+                            <a title="Home" href="main.html" class="element place-right"><span class="icon-home"> Home</span></a>
+                        </li>
+                        <li>
+                            <a title="Perfil" href="main.html" class="element place-right"><span class="icon-user"> Perfil</span></a>
+                        </li>
+                        <li>
+                            <a title="Buscar" href="main.html" class="element place-right"><span class="icon-search"> Buscar</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </header-->
+            <nav>
+                <a href="" id="menuToggle" title="show menu">
+                    <span class="navClosed"><i>show menu</i></span>
+                </a>
+                <a title="Home" href="#" onclick="cambiarPagina('main.html');"><span class="icon-home"> Home</span></a>
+                <a title="Perfil" href="#" onclick="cambiarPagina('formulario_sign.html');" ><span class="icon-user"> Perfil</span></a>
+                <a title="Buscar" href="#" onclick="cambiarPagina('main.html');"><span class="icon-search"> Buscar</span></a>
+            </nav>
+            <div class="grid no-margin">
+                <div class="row" id="content-row">
+                    <div class="span7 centrado" >
+                        <div class="tile-group quadro no-margin">
+                            <div class="tile quadro double-vertical bg-dark opacity calendario-eventos" >
+                                <div class="tile-content image">
+                                    <img src="img/evento_principal.jpg">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span7 centrado">
+                        <div class="tile-group quadro no-margin">
+                            <div class="cuadro-cuadro bg-dark opacity">
+                                <span class="text" >
+                                    <div style="margin-left:5px; text-align:left;display:inline-block;"><br><br>
+                                    www.andrescepeda.com
+                                    </div>
+                                    <div style="margin-right:5px; text-align:right;display:inline-block;float:right;"><br><br>
+                                    <b style="color:yellow;"><i class="icon-star-3"></i><i class="icon-star-3"></i><i class="icon-star-3"></i><i class="icon-star-3"></i><i class="icon-star-3"></i></b>
+                                    </div>
+                                </span>
+                                <span class="text" >
+                                    <div style="margin-left:5px;"><br><br>
+                                    <b><center>Descripcion del Evento</center></b>
+                                    <br><br><br>
+                                    <b>Cepeda Box:</b>$99 Sillas numeradas</span><br><br>
+                                    <b>VIP:</b>$65 Sillas numeradas</span><br><br>
+                                    <b>Prefeencia:</b>$40 Sillas no numeradas</span><br><br>
+                                    Los puntos de venta son Musicalísimo del Mall del Sol, Mr. Books Village y en la Isla de Ticket show de San marino.</div>
+                                </span>
+                                <span class="text" >
+                                    <div style="margin-left:5px;">
+                                        <br><br><br>
+                                        <b style="color:yellow;"><i class="icon-star-3"></i></b> Marcar como favorito<br><br>
+                                        <b><i class="icon-calendar"></i></b> Agregar a mi calendario<br><br>
+                                    </div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="libs/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="libs/jquery/jquery.mobile-1.4.4.min.js"></script>        
+        <script type="text/javascript" src="libs/metroui/metro.min.js"></script>        
+        <script type="text/javascript">
+            //app.initialize();
+            $(".logo_login").click(function(){
+                $.mobile.changePage( "index.html", { transition: "slide" });
+            });
+            loadMenu();
+            
+        </script>
+    </body>
+</html>

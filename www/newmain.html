@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1,width=device-width, height=device-height"/>
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="libs/jquery/jquery.mobile-1.4.4.min.css" />
+        <link rel="stylesheet" type="text/css" href="libs/metroui/metro-bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="libs/metroui/metro-bootstrap-responsive.css" />
+        <link rel="stylesheet" type="text/css" href="libs/metroui/iconFont.min.css" />
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="libs/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="libs/jquery/jquery.mobile-1.4.4.min.js"></script>
+        <script type="text/javascript" src="libs/metroui/metro.min.js"></script>
+        <script type="text/javascript" src="libs/metroui/metro-rating.js"></script>
+        <script type="text/javascript" src="js/openfb.js"></script>
+        <script type="text/javascript" src="js/SocialSharing.js"></script>
+        <script>
+          $(document).ready(function() {
+          $.ajaxSetup({ cache: true });
+          $.getScript('//connect.facebook.net/en_UK/all.js', function(){
+            FB.init({
+              appId: '1522197638019163',
+            });     
+            //$('#loginbutton,#feedbutton').removeAttr('disabled');
+            FB.getLoginStatus(updateStatusCallback);
+          });
+        });
+        </script>
+        <title>ExpoGuayaquil</title>
+    </head>
+    <body class="metro"> 
+        <nav>
+            <a href="" id="menuToggle" title="show menu">
+                <span class="navClosed"><i>show menu</i></span>
+            </a>
+            <a title="Home" href="#content-page" ><span class="icon-home"> Home</span></a>
+            <a title="Perfil" href="#registro" ><span class="icon-user"> Perfil</span></a>
+            <a title="Buscar" href="#buscar" ><span class="icon-search"> Buscar</span></a>
+            <a title="Regresar" href="#" onclick="javascript:history.back()" ><span class=" icon-history"> Regresar</span></a>
+            <a title="Regresar" href="#" onclick="javascript:logout()" ><span class=" icon-exit"> Salir</span></a>
+        </nav>
+        <!-- LOGIN -->
+        <div id="login" class="ametrocontenido container" data-role="page">
+            <div class="titulo"><h1>Bienvenido</h1>
+            </div>
+            <div class="doble-middle">
+                <div class="tile-group full no-margin" style="padding-right:6px!important;">
+                    <div class="tile full bg-dark opacity calendario-eventos" id="iniciar_facebook">
+                        <div class="tile-content icon icono">
+                            <i class="icon-facebook"></i>
+                            Iniciar Sesión en facebook
+                        </div>
+                        <!--div class="tile-status centro">
+                            <span class="name">Tomar Foto</span>
+                        </div-->
+                    </div>
+                </div>
+            </div>
+            <div class="doble-middle">
+                <div class="tile-group full no-margin" style="padding-right:6px!important;">
+                    <div class="tile full bg-dark opacity calendario-eventos" id="iniciar_otros">
+                        <div class="tile-content icon icono">
+                            <i class="icon-mail"></i>
+                            Iniciar Sesión Otros
+                        </div>
+                        <!--div class="tile-status centro">
+                            <span class="name">Tomar Foto</span>
+                        </div-->
+                    </div>
+                </div>
+            </div>
+            <div class="botones">
+            </div>
+            <input type="hidden" id="data_usuario" value="">
+        </div>
+        <!-- MAIN -->
+        <div id="content-page" class="ametrocontenido container" data-role="page">
+            <div class="titulo">
+            </div>
+            <div class="simplerow">
+                <div class="tile-group full no-margin">
+                    <div class="tile full live" data-role="live-tile" id="instagram_display">
+                        <!--div class="tile-content image full"><img src="img/bose.jpg"></div>
+                        <div class="tile-content image full"><img src="img/guayaquil.jpg"></div-->
+                        <div class="tile-status bg-dark opacity">
+                            <span class="name">Ahora en Instagram</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="simplerow">
+                <div class="internalrow">
+                    <div class="cuadro_simple">
+                        <div class="tile-group full no-margin">
+                            <div class="tile full bg-darkCyan" id="tileinstagram">
+                                <div class="tile-content icon icono">
+                                    <i class="icon-instagram"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cuadro_simple">
+                        <div class="tile-group full no-margin">
+                            <div class="tile full bg-lightBlue" id="tiletwitter">
+                                <div class="tile-content icon icono">
+                                    <i class="icon-twitter"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="internalrow">
+                    <div class="cuadro_simple">
+                        <div class="tile-group full no-margin">
+                        <div class="tile full bg-red" id="tileyoutube">
+                            <div class="tile-content icon icono">
+                                <i class="icon-youtube"></i>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="cuadro_simple">
+                        <div class="tile-group full no-margin">
+                        <div class="tile full bg-darkBlue" id="tilefacebook">
+                            <div class="tile-content icon icono">
+                                <i class="icon-facebook"></i>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="doble">
+                <div class="tile-group full no-margin little-padding">
+                    <div class="tile full bg-dark opacity" id="calendario-eventos" >
+                        <div class="tile-content icon icono">
+                            <i class="icon-calendar"></i>
+                        </div>
+                        <div class="tile-status centro">
+                            <span class="name">Calendario de Eventos</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="onethird">
+                <div class="tile-group full no-margin">
+                    <div class="tile simpleheight bg-green no-margin" id="pase_eventos">
+                        <div class="tile-content icon icono">
+                            <i class="icon-ticket"></i>
+                        </div>
+                        <div class="tile-status centro">
+                            <span class="name">Pases Eventos</span>
+                        </div>
+                    </div>
+                    <div class="tile simpleheight no-margin">
+                        <div class="tile-content image">
+                            <img src="img/eventos.jpg">
+                        </div>
+                        <div class="tile-status bg-dark opacity">
+                            <span class="name">Eventos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="twothird">
+                <div class="tile full bg-darkRed" id="editar_fotos">
+                    <div class="tile-content icon icono">
+                        <i class="icon-camera"></i>
+                    </div>
+                    <div class="tile-status centro">
+                        <span class="name">App Editar Fotos</span>
+                    </div>
+                </div>
+            </div>
+            <div class="botones">
+            </div>
+        </div>
+        <!-- CALENDARIO-->
+        <div id="calendario" class="ametrocontenido container" data-role="page">
+            <div class="titulo"><h1>Calendario</h1>
+            </div>
+            <div class="doble">
+                <div class="tile-group full no-margin">
+                    <div class="tile full bg-dark opacity calendario-principal" id="evento_principal">
+                        <div class="tile-content image">
+                            <img src="img/evento_principal.jpg" id="evento_principal_imagen">
+                        </div>
+                        <div class="tile-status bg-dark opacity">
+                            <span class="name">Próximo evento</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="simplerow">
+                <div class="tile-group full no-margin">
+                    <div class="tile full double-vertical bg-dark opacity calendario-eventos" id="calendario_mes">
+                        <div class="tile-content icon icono">
+                            <i class="icon-calendar"></i>
+                        </div>
+                        <div class="tile-status centro">
+                            <span class="name">Calendario por Mes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="simplerow">
+                <div class="tile-group full no-margin">
+                    <div class="tile full bg-dark opacity calendario-eventos" id="calendario_tipo">
+                        <div class="tile-content icon icono">
+                            <i class="icon-calendar"></i>
+                        </div>
+                        <div class="tile-status centro">
+                            <span class="name">Calendario por tipo de evento</span>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="doble">
+                <div class="tile-group full no-margin little-padding">
+                    <div class="tile full bg-dark opacity calendario-eventos" id="calendario_todos">
+                        <div class="tile-content icon icono">
+                            <i class="icon-calendar"></i>
+                        </div>
+                        <div class="tile-status centro">
+                            <span class="name">Ver Todos Los Eventos</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="botones">
+                <i class="icon-history"></i> Volver
+            </div>
+        </div>
+        <!-- LISTA TICKETS -->
+        <div id="lista_tickets" class="ametrocontenido container" data-role="page">
+            <div class="titulo"><h1 id="titulo_lista_eventos">Eventos</h1>
+            </div>
+            <div id="listado_tickets">
+                <div class="evento">
+                    <div class="simplerow" style="padding-right:0px;">
+                        <div class="tile full bg-dark opacity no-margin" >
+                            <div class="tile-content image"><img src="img/guayaquil.jpg"></div>
+                        </div>
+                    </div>
+                    <div class="simplerow" style="padding-left:0px;">
+                        <div class="tile full bg-dark opacity" >
+                            <div class="tile-content icon">
+                            </div>
+                            <div class="tile-status">
+                                <span class="name">
+                                    <b>Fecha:</b>13 de Septiembre 2014<br>
+                                    <b>Horario:</b>9:00 PM<br>
+                                    <b>Ver mas...</b><br>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="evento">
+                    <div class="simplerow" style="padding-right:0px;">
+                        <div class="tile full bg-dark opacity no-margin" >
+                            <div class="tile-content image"><img src="img/bose.jpg"></div>
+                        </div>
+                    </div>
+                    <div class="simplerow" style="padding-left:0px;">
+                        <div class="tile full bg-dark opacity" >
+                            <div class="tile-content icon">
+                            </div>
+                            <div class="tile-status">
+                                <span class="name">
+                                    <b>Fecha:</b>13 de Septiembre 2014<br>
+                                    <b>Horario:</b>9:00 PM<br>
+                                    <b>Ver mas...</b><br>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="evento">
+                    <div class="simplerow" style="padding-right:0px;">
+                        <div class="tile full bg-dark opacity no-margin" >
+                            <div class="tile-content image"><img src="img/guayaquil.jpg"></div>
+                        </div>
+                    </div>
+                    <div class="simplerow" style="padding-left:0px;">
+                        <div class="tile full bg-dark opacity" >
+                            <div class="tile-content icon">
+                            </div>
+                            <div class="tile-status">
+                                <span class="name">
+                                    <b>Fecha:</b>13 de Septiembre 2014<br>
+                                    <b>Horario:</b>9:00 PM<br>
+                                    <b>Ver mas...</b><br>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="evento">
+                    <div class="simplerow" style="padding-right:0px;">
+                        <div class="tile full bg-dark opacity no-margin" >
+                            <div class="tile-content image"><img src="img/bose.jpg"></div>
+                        </div>
+                    </div>
+                    <div class="simplerow" style="padding-left:0px;">
+                        <div class="tile full bg-dark opacity" >
+                            <div class="tile-content icon">
+                            </div>
+                            <div class="tile-status">
+                                <span class="name">
+                                    <b>Fecha:</b>13 de Septiembre 2014<br>
+                                    <b>Horario:</b>9:00 PM<br>
+                                    <b>Ver mas...</b><br>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="ticket_hidden" style="display:none;">
+                <div class="evento">
+                    <div class="simplerow" style="padding-right:0px;">
+                        <div class="tile full bg-dark opacity no-margin" >
+                            <div class="tile-content image"><img id="evento_imagen" src="img/bose.jpg"></div>
+                        </div>
+                    </div>
+                    <div class="simplerow" style="padding-left:0px;">
+                        <div class="tile full bg-dark opacity" >
+                            <div class="tile-content icon">
+                            </div>
+                            <div class="tile-status">
+                                <span class="name" id="evento_desripcion">
+                                    <b>Fecha:</b>13 de Septiembre 2014<br>
+                                    <b>Horario:</b>9:00 PM<br>
+                                    <b>Ver mas...</b><br>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="botones">
+                <i class="icon-history"></i> Volver
+            </div>
+        </div>
+        <!-- LISTA EVENTOS -->
+        <div id="lista_eventos" class="ametrocontenido container" data-role="page">
+            <div class="titulo"><h1 id="titulo_lista_eventos">Lista de Eventos</h1>
+            </div>
+            <div id="listado_eventos">
+                
+                <div class="evento">
+                    <div class="simplerow" style="padding-right:0px;">
+                        <div class="tile full bg-dark opacity no-margin" >
+                            <div class="tile-content image"><img src="img/guayaquil.jpg"></div>
+                        </div>
+                    </div>
+                    <div class="simplerow" style="padding-left:0px;">
+                        <div class="tile full bg-dark opacity" >
+                            <div class="tile-content icon">
+                            </div>
+                            <div class="tile-status">
+                                <span class="name">
+                                    <b>Fecha:</b>13 de Septiembre 2014<br>
+                                    <b>Horario:</b>9:00 PM<br>
+                                    <b>Ver mas...</b><br>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="evento">
+                    <div class="simplerow" style="padding-right:0px;">
+                        <div class="tile full bg-dark opacity no-margin" >
+                            <div class="tile-content image"><img src="img/bose.jpg"></div>
+                        </div>
+                    </div>
+                    <div class="simplerow" style="padding-left:0px;">
+                        <div class="tile full bg-dark opacity" >
+                            <div class="tile-content icon">
+                            </div>
+                            <div class="tile-status">
+                                <span class="name">
+                                    <b>Fecha:</b>13 de Septiembre 2014<br>
+                                    <b>Horario:</b>9:00 PM<br>
+                                    <b>Ver mas...</b><br>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="evento">
+                    <div class="simplerow" style="padding-right:0px;">
+                        <div class="tile full bg-dark opacity no-margin" >
+                            <div class="tile-content image"><img src="img/guayaquil.jpg"></div>
+                        </div>
+                    </div>
+                    <div class="simplerow" style="padding-left:0px;">
+                        <div class="tile full bg-dark opacity" >
+                            <div class="tile-content icon">
+                            </div>
+                            <div class="tile-status">
+                                <span class="name">
+                                    <b>Fecha:</b>13 de Septiembre 2014<br>
+                                    <b>Horario:</b>9:00 PM<br>
+                                    <b>Ver mas...</b><br>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="evento">
+                    <div class="simplerow" style="padding-right:0px;">
+                        <div class="tile full bg-dark opacity no-margin" >
+                            <div class="tile-content image"><img src="img/bose.jpg"></div>
+                        </div>
+                    </div>
+                    <div class="simplerow" style="padding-left:0px;">
+                        <div class="tile full bg-dark opacity" >
+                            <div class="tile-content icon">
+                            </div>
+                            <div class="tile-status">
+                                <span class="name">
+                                    <b>Fecha:</b>13 de Septiembre 2014<br>
+                                    <b>Horario:</b>9:00 PM<br>
+                                    <b>Ver mas...</b><br>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="botones">
+                <i class="icon-history"></i> Volver
+            </div>
+            <div id="evento_hidden" style="display:none;">
+                <div class="evento">
+                    <div class="simplerow" style="padding-right:0px;">
+                        <div class="tile full bg-dark opacity no-margin" >
+                            <div class="tile-content image"><img id="evento_imagen" src="img/bose.jpg"></div>
+                        </div>
+                    </div>
+                    <div class="simplerow" style="padding-left:0px;">
+                        <div class="tile full bg-dark opacity" >
+                            <div class="tile-content icon">
+                            </div>
+                            <div class="tile-status">
+                                <span class="name" id="evento_desripcion">
+                                    <b>Fecha:</b>13 de Septiembre 2014<br>
+                                    <b>Horario:</b>9:00 PM<br>
+                                    <b>Ver mas...</b><br>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!-- DETALLE DE EVENTO -->
+        <div id="detalle_evento" class="ametrocontenido container" data-role="page">
+            <div class="titulo"><h1 id="titulo_detalle_eventos">Detalle Evento</h1></div>
+            <div class="evento">
+                <div class="simplerow" style="padding-right:0px;">
+                    <div class="tile full bg-dark opacity no-margin" >
+                        <div class="tile-content image"><img src="img/bose.jpg"></div>
+                    </div>
+                </div>
+                <div class="simplerow" style="padding-left:0px;padding-right:6px;">
+                    <div class="tile full bg-dark opacity" >
+                        <div class="tile-content icon">
+                        </div>
+                        <div class="tile-status">
+                            <span class="name">
+                                <b>Fecha:</b>13 de Septiembre 2014<br>
+                                <b>Horario:</b>9:00 PM<br>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="doble-square" id="informacion_evento">
+                <div class="tile-group full no-margin">
+                    <div class="full bg-dark opacity calendario-principal" style="padding:5px 5px 5px 0px;">
+                        <span class="text" >
+                            <div style="margin-left:5px; text-align:left;display:inline-block;" id="evento_url">
+                            www.andrescepeda.com
+                            </div>
+                            <!--div style="margin-right:5px; text-align:right;display:inline-block;float:right;">
+                                <div class="rating fg-yellow">
+                                    <ul>
+                                        <li class="rated"></li>
+                                        <li class="rated"></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                    <span class="score-hint"></span>
+                                </div>
+                            </div-->
+                        </span>
+                        
+                        <div style="margin-left:5px;" id="evento_descripcion"><br/><br/>
+                        <b><center>Descripcion del Evento</center></b>
+                        <br>
+                        <b>Cepeda Box:</b>$99 Sillas numeradas<br/>
+                        <b>VIP:</b>$65 Sillas numeradas<br>
+                        <b>Preferencia:</b>$40 Sillas no numeradas<br/>
+                        Los puntos de venta son Musicalísimo del Mall del Sol, Mr. Books Village y en la Isla de Ticket show de San marino.</div>
+                        <br>
+                        <div style="margin-left:5px;">
+                            <div style="margin-left:5px; text-align:left;display:inline-block;">
+                                <b style="color:yellow;"><i class="icon-star-3"></i></b> Marcar como favorito<br/>
+                            </div>
+                            <div style="margin-left:5px; text-align:right;display:inline-block; float:right;" id="agregar_calendario">
+                                <b><i class="icon-calendar"></i></b> Agregar a mi calendario<br/><br/>
+                            </div>
+
+                        </div><br/><br/>
+                        <div style="margin-left:5px;" class="divShare">
+                            <div class="tile full bg-lightBlue" id="sharetwitter">
+                                <div class="tile-content icon">
+                                    <i class="icon-twitter"></i>
+                                </div>
+                            </div>
+                            <div class="tile full bg-blue" id="sharefacebook">
+                                <div class="tile-content icon">
+                                    <i class="icon-facebook"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-left:5px;">
+                            <div class="input-control-textarea">
+                                <textarea id="texto_share">#CentroConvencionesGye #Enjoy</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="botones">
+                <i class="icon-history"></i> Volver
+            </div>
+            <input type="hidden" id="id_evento"/>
+        </div>
+        <!-- CAMARA-->
+        <div id="camara" class="ametrocontenido container" data-role="page">
+            <div class="titulo"><h1 id="titulo_lista_eventos"></h1>
+            </div>
+            <div class="doble-middle">
+                <div class="tile-group full no-margin" style="padding-right:6px!important;">
+                    <div class="tile full bg-dark opacity calendario-eventos" id="take_picture">
+                        <div class="tile-content icon icono">
+                            <i class="icon-camera"></i>
+                        </div>
+                        <div class="tile-status centro">
+                            <span class="name">Tomar Foto</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="doble-square" id="foto">
+                <div class="tile-group full no-margin">
+                    <div class="full bg-dark opacity" style="padding:5px 5px 5px 5px;" id="div_imagen">
+                        <canvas id="cameraPicture"></canvas>
+                        <img style="display:none;" id="largeImage" src="" />
+                        <div style="margin-left:5px;display:none;" id="sharePicture">
+                            <div class="tile full bg-lightBlue" id="sharepictwitter">
+                                <div class="tile-content icon">
+                                    <i class="icon-twitter"></i>
+                                </div>
+                            </div>
+                            <div class="tile full bg-blue" id="sharepicfacebook">
+                                <div class="tile-content icon">
+                                    <i class="icon-facebook"></i>
+                                </div>
+                            </div>
+                            <div class="tile full bg-yellow" id="sharepicother">
+                                <div class="tile-content icon">
+                                    <i class="icon-mail"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>        
+                </div>
+                <input type="hidden" id="file_url"/>
+            </div>
+            <div class="botones">
+                <i class="icon-history"></i> Volver
+            </div>
+        </div>
+        <!-- REGISTRO -->
+        <div id="registro" class="ametrocontenido container" data-role="page">
+            <div class="titulo"><h1 id="titulo_lista_eventos">Registro</h1>
+            </div>
+            <div class="doble-square" id="foto">
+                <div class="tile-group full no-margin">
+                    <div class="full bg-dark opacity calendario-principal" style="padding:5px 5px 5px 5px;">
+                        <label>Nombre</label>
+                        <div class="input-control text bg-dark" data-role="input-control">
+                            <input type="text" placeholder="" autofocus="" id="reg_nombre">
+                            <button class="btn-clear" tabindex="-1" type="button"></button>
+                        </div>
+                        <label>Apellido</label>
+                        <div class="input-control text bg-dark" data-role="input-control">
+                            <input type="text" placeholder="" id="reg_apellido">
+                            <button class="btn-clear" tabindex="-1" type="button"></button>
+                        </div>
+                        <label>Ciudad</label>
+                        <div class="input-control text bg-dark" data-role="input-control">
+                            <input type="text" placeholder="" id="reg_ciudad">
+                            <button class="btn-clear" tabindex="-1" type="button"></button>
+                        </div>
+                        <label>Email</label>
+                        <div class="input-control text bg-dark" data-role="input-control">
+                            <input type="email" placeholder="" id="reg_email">
+                            <button class="btn-clear" tabindex="-1" type="button"></button>
+                        </div>
+                        <label>Actividad</label>
+                        <div class="input-control text bg-dark" data-role="input-control">
+                            <input type="text" placeholder="" id="reg_actividad">
+                            <button class="btn-clear" tabindex="-1" type="button"></button>
+                        </div>
+                        <label>Fecha Nacimiento</label>
+                        <div class="input-control text bg-dark" data-role="input-control">
+                            <input type="date" placeholder="" id="reg_nacimiento">
+                            <button class="btn-clear" tabindex="-1" type="button"></button>
+                        </div>
+                        <!--label>Password</label>
+                        <div class="input-control password bg-dark" data-role="input-control">
+                            <input type="password" placeholder="" >
+                            <button class="btn-reveal" tabindex="-1" type="button"></button>
+                        </div-->
+                        <br><br>
+                        <input id="reg_guardar" type="button" value="OK">
+                    </div>        
+                </div>
+            </div>
+            <div class="botones">
+                <i class="icon-history"></i> Volver
+            </div>
+        </div>
+        
+        <script type="text/javascript">
+            app.initialize();
+            //Loaders
+            $('#login').on('pageshow', function () {
+                detectAlreadyLogin();
+                ajustarObjetos(); 
+                initFacebook();
+                //unloadMenu();
+            });
+            $('#content-page').on('pageshow', function () {
+                loadMenu();
+                detectaLogin();
+                ajustarObjetos(); 
+                obtenerInstagram();
+                startService();
+            });
+            $('#calendario').on('pageshow', function () {
+                loadMenu();
+                detectaLogin();
+                ajustarObjetos();
+                startService();
+                cargaProximoEvento();
+            });
+            $('#lista_eventos').on('pageshow', function () {
+                loadMenu();
+                ajustarObjetos();
+                startService();
+                cargarEventoMes('parametro');
+            });
+            $('#lista_tickets').on('pageshow', function () {
+                loadMenu();
+                ajustarObjetos();
+                startService();
+                cargarListaTickets();
+            });
+            $('#detalle_evento').on('pageshow', function () {
+                loadMenu();
+                //detectaLogin();
+                ajustarObjetos(); 
+                app.initialize();
+                startService();
+                cargarDetalleEvento();
+                $(function(){
+                    $(".rating").rating({
+                        static: false,
+                        score: 2,
+                        stars: 5,
+                        showHint: true,
+                        hints: ['mal', 'pobre', 'regular', 'bien', 'excelente'],
+                        showScore: false,
+                        scoreHint: "Calificación: ",
+                    });
+                });
+            });
+            $('#camara').on('pageshow', function () {
+                loadMenu();
+                detectaLogin();
+                ajustarObjetos();
+                app.initialize();
+                onDeviceReady();
+                startService();
+            });
+            $('#registro').on('pageshow', function () {
+                //detectaLogin();
+                loadMenu();
+                ajustarObjetos(); 
+                obtenerLocal();
+                startService();
+            });
+            
+            //Ajustes primera carga
+            $(document).ready(function(){
+                ajustarObjetos(); 
+                loadMenu();
+            });
+            $(window).resize(function(){
+                ajustarObjetos();
+                loadMenu();
+            });
+            $(document).on("pageshow", "#content-page", function( event ) {
+                loadMenu();
+                ajustarObjetos();
+            });
+            //Listeners
+            $( ":mobile-pagecontainer" ).on( "pagecontainerhide", function( event, ui ) {
+                    ajustarObjetos();
+                });
+            
+            //Links
+            //Main
+            $("#tileyoutube").click(function(){
+               window.open('https://www.youtube.com/user/ExpoGuayaquil','_system'); 
+            });
+            $("#tileinstagram").click(function(){
+               window.open('http://instagram.com/convencionesgye','_system'); 
+               //window.open('instagram://user?username=convencionesgye','_system'); 
+                //username=foo
+            });
+            $("#tiletwitter").click(function(){
+               window.open('https://twitter.com/ConvencionesGye','_system'); 
+            });
+            $("#tilefacebook").click(function(){
+               //window.open('https://www.facebook.com/centrodeconvenciones','_system'); 
+                window.open('fb://page/153716171348798','_system');
+            });
+            $("#calendario-eventos").click(function(){
+                $( ":mobile-pagecontainer" ).pagecontainer( "change", "newmain.html#calendario", { role: "page",transition:"slide",reload:true } );
+            });
+            $("#editar_fotos").click(function(){
+                $( ":mobile-pagecontainer" ).pagecontainer( "change", "newmain.html#camara", { role: "page",transition:"slide",reload:true } );
+            });
+            $("#pase_eventos").click(function(){
+                $( ":mobile-pagecontainer" ).pagecontainer( "change", "newmain.html#lista_tickets", { role: "page",transition:"slide",reload:true } );
+            });
+            
+            
+            //Calendario
+            $("#evento-principal").click(function(){
+                $( ":mobile-pagecontainer" ).pagecontainer( "change", "newmain.html#detalle_evento", { role: "page",transition:"slide",reload:true } );
+            });
+            $("#calendario_mes").click(function(){
+                $( ":mobile-pagecontainer" ).pagecontainer( "change", "newmain.html#lista_eventos", { role: "page",transition:"slide",reload:true } );
+            });
+            $("#calendario_tipo").click(function(){
+                $( ":mobile-pagecontainer" ).pagecontainer( "change", "newmain.html#lista_eventos", { role: "page",transition:"slide",reload:true } );
+            });
+            $("#calendario_todos").click(function(){
+                $( ":mobile-pagecontainer" ).pagecontainer( "change", "newmain.html#lista_eventos", { role: "page",transition:"slide",reload:true } );
+            });
+            //lista eventos
+            //tmp
+            $(".evento").click(function(){
+                $( ":mobile-pagecontainer" ).pagecontainer( "change", "newmain.html#detalle_evento", { role: "page",transition:"slide",reload:true } );
+            });
+            //Detalle evento
+            $("#sharefacebook").click(function(){
+                window.plugins.socialsharing.shareViaFacebook($("#texto_share").val(), null /* img */, 'http://www.expoguayaquil.com/' /* url */, function() {console.log('share ok')}, function(errormsg){alert(errormsg)});
+                //window.plugins.socialsharing.shareViaFacebookWithPasteMessageHint($("#texto_share").val(), null /* img */, null /* url */, 'Paste it dude!', function() {console.log('share ok')}, function(errormsg){alert(errormsg)})
+            });
+            $("#sharetwitter").click(function(){
+                window.plugins.socialsharing.shareViaTwitter($("#texto_share").val(), null /* img */, null /* url */);
+            });
+            $("#agregar_calendario").click(function(){
+                evento={
+                    'nombre':'apk',
+                    'centroDesc':'centro',
+                    'fecha':'2014-11-01',
+                    'hora':'15:00',
+                    'consultaDesc':'consulta',
+                    'actividadDesc':'actividad',
+                };
+                //[evento.nombre, evento.centroDesc, evento.fecha, evento.hora, evento.consultaDesc, evento.actividadDesc]
+                agregarCalendario(evento);
+            });
+            //camara
+            $("#sharepicfacebook").click(function(){
+                window.plugins.socialsharing.shareViaFacebook('#CentroConvencionesGye', $('#file_url').val() /* img */, null /* url */, function() {console.log('share ok')}, function(errormsg){alert(errormsg)});
+                //window.plugins.socialsharing.shareViaFacebook('#CentroConvencionesGye', 'Android filename', $('#file_url').val(), null);
+            });
+            $("#sharepictwitter").click(function(){
+                window.plugins.socialsharing.shareViaTwitter('#CentroConvencionesGye', $('#file_url').val() /* img */, null /* url */);
+                //window.plugins.socialsharing.share(null, 'Android filename', $('#file_url').val(), null);
+                //window.plugins.socialsharing.shareViaTwitter('#CentroConvencionesGye', 'Android filename', $('#file_url').val(), null);
+            });
+            $("#sharepicother").click(function(){
+                window.plugins.socialsharing.share(null, 'Android filename', $('#file_url').val(), null);
+            });
+            
+            $("#take_picture").click(function(){
+                capturePhotoEdit();
+            });
+            //General
+            $(".botones").click(function(){
+                history.back();
+            });
+            //Registro
+            $("#reg_guardar").click(function(){
+                var usuario = {
+                    'nombre':           $("#reg_nombre").val(),
+                    'apellido':         $('#reg_apellido').val(),
+                    'ciudad':           $('#reg_ciudad').val(),
+                    'email':            $('#reg_email').val(),
+                    'actividad':        $('#reg_actividad').val(),
+                    'fecha_nacimiento': $('#reg_nacimiento').val(),
+                };
+                registrarLocal(usuario);
+                $( ":mobile-pagecontainer" ).pagecontainer( "change", "newmain.html#content-page", { role: "page",transition:"slide",reload:true } );
+            });
+            
+            //Login
+            $("#iniciar_facebook").on('click', function(e) {
+                facebookLogin();
+            });
+            
+            //Datepicker
+            $('.nativedatepicker').focus(function(event) {
+                var currentField = $(this);
+                var myNewDate = new Date(Date.parse(currentField.val())) || new Date();
+
+                // Same handling for iPhone and Android
+                window.plugins.datePicker.show({
+                    date : myNewDate,
+                    mode : 'date', // date or time or blank for both
+                    allowOldDates : true
+                }, function(returnDate) {
+                    var newDate = new Date(returnDate);
+                    var newString = newDate.toString();
+                    newString = newString.substring(0,15);
+                    currentField.val(newString);
+                    // This fixes the problem you mention at the bottom of this script with it not working a second/third time around, because it is in focus.
+                    currentField.blur();
+                });
+            });
+                
+        </script>
+        <style>
+            .internalrow{
+                width: 100%;
+                height: 50%;
+            }
+            .cuadro_simple{
+                width: 50%;
+                height: 100%;
+                float: left;
+                padding-right: 6px;
+            }
+            .onethird{
+                width: 33%;
+                float: left;
+                padding: 3px;
+            }
+            .twothird{
+                width: 66%;
+                float: left;
+                padding: 6px 3px 3px 3px;
+            }
+            .onethird>.tile-group>.tile{
+                width: 100%;
+                height: 50%;
+                padding-bottom: 6px!important;
+                margin-bottom: 3px!important;
+            }
+            .titulo{
+                height: 40px;
+            }
+            .botones{
+                height: 40px;
+            }
+            .centro{
+                text-align: center;
+            }
+            .doble-square{
+                width:100%;
+                padding: 3px 6px 3px 3px;
+                font-size: 1.4em;
+            }
+            .metro .rating .score-hint{
+                color:yellow!important;
+            }
+            .divShare{
+                height: 35px!important;
+            }
+            #sharetwitter,#sharefacebook{
+                height: 30px!important;
+                width: 30px!important;
+            }
+            #sharepictwitter,#sharepicfacebook,#sharepicother{
+                height: 30px!important;
+                width: 30px!important;
+            }
+            #sharetwitter>.icon>[class*="icon-"],#sharefacebook>.icon>[class*="icon-"]{
+                font-size: 15px;
+                text-align: center;
+                line-height: 30px;
+                padding: 0px;
+                vertical-align: middle;
+            }
+            #sharepictwitter>.icon>[class*="icon-"],#sharepicfacebook>.icon>[class*="icon-"],#sharepicother>.icon>[class*="icon-"]{
+                font-size: 15px;
+                text-align: center;
+                line-height: 30px;
+                padding: 0px;
+                vertical-align: middle;
+            }
+            #texto_share{
+                height: 65px!important;
+            }
+            .input-control{
+                height: 38px!important;
+            }
+            .input-control-textarea{
+                height: 78px!important;
+            }
+            .botones{
+                font-size: 20px;
+                color:#fff;
+            }
+        </style>
+        
+    </body>
+</html>
